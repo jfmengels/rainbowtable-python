@@ -117,10 +117,10 @@ class RainbowTable:
             hashV = self._getFinalHash(startHash, col)
             pwdList = self._find(hashV)
             for pwd in pwdList:
-                if pwd != None:
-                    resPwd = self._findHashInChain(pwd, startHash)
-                    if resPwd != None:
-                        return resPwd
+                #print('\t', pwd)
+                resPwd = self._findHashInChain(pwd, startHash)
+                if resPwd != None:
+                    return resPwd
         return None
 
     def _getFinalHash(self, startHash, startCol):
@@ -132,6 +132,8 @@ class RainbowTable:
 
     def _findHashInChain(self, startPwd, startHash):
         hashV = self.hashWord(startPwd)
+        if hashV == startHash:
+            return startPwd
         col = 0
         while col < self.columns:
             pwd = self.reduce(hashV, col)
