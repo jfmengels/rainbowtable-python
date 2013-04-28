@@ -2,7 +2,7 @@ from rainbowGenerator import *
 def test(pwd):
     rain = RainbowTable()
     rain.readFromFile("D:/Coding/Python/RainbowTable/rain.txt")
-    return rain.crackPassword(rain.hashWord(pwd))
+    return rain.crackHash(rain.hashWord(pwd))
 
 def testLots(n):
     rain = RainbowTable()
@@ -11,7 +11,7 @@ def testLots(n):
     for i in range(1, n):
         pwd = rain.randomPassword()
         hash = rain.hashWord(pwd)
-        if rain.crackPassword(hash) == pwd:
+        if rain.crackHash(hash) == pwd:
             count += 1
             if i % 100 == 0:
                 print('Tested', i, '/', n, ':', count, ' ', count / i * 100, '%')
@@ -27,7 +27,7 @@ def testAll(res=None):
     print('Starting cracking passwords')
     for i, pwd in enumerate(res):
         hash = rain.hashWord(pwd)
-        if rain.crackPassword(hash) == pwd:
+        if rain.crackHash(hash) == pwd:
             count += 1
         if i % 100 == 0:
             print('Tested', i, '/', len(res), ':', count, ' ', count / len(res))
